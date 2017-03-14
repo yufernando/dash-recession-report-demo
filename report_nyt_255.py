@@ -261,6 +261,7 @@ layout = html.Div([
     ),
 
     dcc.Markdown('''
+    ***
     ## More Bad — and Good — Jobs
     Americans often lament the quality of jobs today, and some
     low-paying industries — like **fast food**, where annual average pay
@@ -285,6 +286,7 @@ layout = html.Div([
     ),
 
     dcc.Markdown('''
+    ***
     ## The Medical Economy
     The middle-wage industries that have added jobs are
     overwhelmingly in health care.
@@ -313,6 +315,7 @@ layout = html.Div([
     ),
 
     dcc.Markdown('''
+    ***
     ## A Long Housing Bust
     Home prices have rebounded from their crisis lows,
     but home building remains at historically low levels.
@@ -341,6 +344,7 @@ layout = html.Div([
     ),
 
     dcc.Markdown('''
+    ***
     ## Black Gold Rush
     While it took a hit from the recession,
     oil and gas extraction — and its associated jobs —
@@ -363,6 +367,7 @@ layout = html.Div([
     ),
 
     dcc.Markdown('''
+    ***
     ## Digital Revolution
     Bookstores, printers and publishers of newspapers and magazines
     have lost a combined 400,000 jobs since the recession began.
@@ -385,6 +390,7 @@ layout = html.Div([
     ),
 
     dcc.Markdown('''
+    ***
     ## Grooming Boom
     In the midst of recession, Americans held on to simple luxuries —
     for themselves and their pets.
@@ -402,8 +408,9 @@ layout = html.Div([
     ),
 
     dcc.Markdown('''
+    ***
     ## And More
-    Explore trends yourself by filtering through industries with
+    Discover patterns yourself by filtering through industries with
     the dropdown below.
     '''.replace('  ', ''), className='container',
     containerProps={'style': {'maxWidth': '650px'}}),
@@ -412,29 +419,63 @@ layout = html.Div([
         dcc.Dropdown(
             options=[
                 {'label': c, 'value': c}
-                for c in sorted(list(df_jobs.nytcategory.unique()))
+                for c in sorted(list(df_jobs.nytlabel.unique()))
             ],
-            value=['Business', 'Travel'],
+            value=['Florists', 'Bookstores and news dealers'],
             multi=True,
             id='category-filter',
         ), className='container', style={'maxWidth': '650px'}),
-    html.Div(id='filtered-content')
+    html.Div(id='filtered-content'),
+
+    dcc.Markdown('''
+    ***
+    ## Made with Dash
+
+    This report was written in Python with the Dash framework.
+    Dash abstracts away all of the server logic, API calls, CSS,
+    HTML, and Javascript that is usually required to produce a rich web
+    application. This application was written in a single python file
+    containing around 500 lines of code. This includes the data analysis,
+    markup, and interactive visualizations. See for yourself below.
+
+    Interested in what you see?
+    [Get in touch for early access](https://plot.ly/products/consulting-and-oem/).
+    '''.replace('  ', ''),
+        className='container',
+        containerProps={'style': {'maxWidth': '650px'}}
+    ),
+
+    html.Div(
+        dcc.SyntaxHighlighter(
+            open('report_nyt_255.py', 'r').read(),
+            language='python'
+        ),
+        className='container',
+        style={'maxWidth': '650px', 'borderLeft': 'thin solid lightgrey'}
+    )
+
 ])
 
 
 @app.react('filtered-content', ['category-filter'])
 def filter(dropdown):
     selected_values = dropdown['value']
-    return {
-        'content': dcc.Graph(
-            id='filtered-graph',
-            figure=create_figure(
-                list(df_jobs[
-                    df_jobs.nytcategory.isin(selected_values)
-                ].cescode) if selected_values else None
-            )
+    figure = create_figure(
+        list(df_jobs[
+            df_jobs.nytlabel.isin(selected_values)
+        ].cescode) if selected_values else None,
+        skip_labels=['-'],
+    )
+
+    for trace in figure['data']:
+        trace['hoverinfo'] = 'text'
+
+    return {'content': dcc.Graph(
+        id='filtered-graph',
+        figure=figure
         )
     }
+
 
 app.layout = layout
 
