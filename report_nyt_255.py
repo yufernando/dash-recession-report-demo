@@ -214,8 +214,8 @@ server = Flask(__name__)
 app = Dash(__name__, server=server)
 app.css.append_css({
     'external_url': (
-        'https://rawgit.com/chriddyp/0247653a7c52feb4c48437e1c1837f75'
-        '/raw/9ee5fa299197c90bb1a94a1e7711e22c28533812/dash.css'
+        'https://cdn.rawgit.com/chriddyp/0247653a7c52feb4c48437e1c1837f75'
+        '/raw/a68333b876edaf62df2efa7bac0e9b3613258851/dash.css'
     )
 })
 
