@@ -212,7 +212,7 @@ def create_figure(highlight_cescode=None, skip_labels=[], show_only=[]):
 
 
 server = Flask(__name__)
-app = Dash(__name__, server=server)
+app = Dash(__name__, server=server, url_base_pathname='/dash/gallery/recession-report/', csrf_protect=False)
 app.css.append_css({
     'external_url': (
         'https://cdn.rawgit.com/chriddyp/0247653a7c52feb4c48437e1c1837f75'
