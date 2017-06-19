@@ -3,6 +3,7 @@ import pandas as pd
 
 import dash
 from dash import Dash
+from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
 import colorlover as cl
@@ -439,7 +440,7 @@ layout = html.Div([
     markup, and interactive visualizations. See for yourself below.
 
     Interested in what you see?
-    [Get in touch for early access](https://plot.ly/products/consulting-and-oem/).
+    [Get in touch](https://plot.ly/products/consulting-and-oem/).
     '''.replace('  ', ''),
         className='container',
         containerProps={'style': {'maxWidth': '650px'}}
@@ -457,9 +458,13 @@ layout = html.Div([
 ])
 
 
-@app.react('filtered-content', ['category-filter'])
-def filter(dropdown):
-    selected_values = dropdown['value']
+app.layout = layout
+
+
+@app.callback(
+    Output('filtered-content', 'children'),
+    [Input('category-filter', 'value')])
+def filter(selected_values):
     figure = create_figure(
         list(df_jobs[
             df_jobs.nytlabel.isin(selected_values)
@@ -470,16 +475,12 @@ def filter(dropdown):
     for trace in figure['data']:
         trace['hoverinfo'] = 'text'
 
-    return {'content': dcc.Graph(
+    return dcc.Graph(
         id='filtered-graph',
         figure=figure
-        )
-    }
+    )
 
 
-app.layout = layout
 
 if __name__ == '__main__':
     app.run_server(debug=True, threaded=True)
-else:
-    app._setup_server()
