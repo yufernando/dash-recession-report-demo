@@ -211,8 +211,12 @@ def create_figure(highlight_cescode=None, skip_labels=[], show_only=[]):
     return {'data': traces, 'layout': layout}
 
 
-server = Flask(__name__)
-app = Dash(__name__, server=server, url_base_pathname='/dash/gallery/recession-report/', csrf_protect=False)
+app = Dash(__name__,url_base_pathname='/dash/gallery/recession-report/')
+server = app.server
+if 'DYNO' in os.environ:
+    app.config.routes_pathname_prefix = '/dash/gallery/recession-report/'
+    app.config.requests_pathname_prefix = 'https://dash-showcase-report.herokuapp.com/dash/gallery/recession-report/'
+
 app.css.append_css({
     'external_url': (
         'https://cdn.rawgit.com/chriddyp/0247653a7c52feb4c48437e1c1837f75'
