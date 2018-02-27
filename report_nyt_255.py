@@ -213,12 +213,8 @@ def create_figure(highlight_cescode=None, skip_labels=[], show_only=[]):
     return {'data': traces, 'layout': layout}
 
 
-app = Dash(__name__,url_base_pathname='/dash/gallery/recession-report/')
+app = Dash(__name__)
 server = app.server
-CORS(server)
-if 'DYNO' in os.environ:
-    app.config.routes_pathname_prefix = '/dash/gallery/recession-report/'
-    app.config.requests_pathname_prefix = 'https://dash-showcase-report.herokuapp.com/dash/gallery/recession-report/'
 
 app.css.append_css({
     'external_url': (
