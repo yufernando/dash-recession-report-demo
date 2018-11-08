@@ -216,13 +216,6 @@ def create_figure(highlight_cescode=None, skip_labels=[], show_only=[]):
 app = Dash(__name__)
 server = app.server
 
-app.css.append_css({
-    'external_url': (
-        'https://cdn.rawgit.com/chriddyp/0247653a7c52feb4c48437e1c1837f75'
-        '/raw/a68333b876edaf62df2efa7bac0e9b3613258851/dash.css'
-    )
-})
-
 layout = html.Div([
 
     dcc.Markdown('''
