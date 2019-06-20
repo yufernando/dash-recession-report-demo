@@ -25,7 +25,7 @@ series = {
 }
 for i in range(len(df_jobs)):
     jobs_meta = df_jobs.iloc[i, 0:11]
-    jobs_row = df_jobs.iloc[i, 11:]
+    jobs_row = df_jobs.iloc[i, 37:]
     name = jobs_meta.nytlabel
     cescode = jobs_meta.cescode
 
@@ -149,7 +149,7 @@ def create_figure(highlight_cescode=None, skip_labels=[], show_only=[]):
                 (show_only and label in show_only)):
             annotations.append({
                 'x': traces[-1]['x'][-1], 'xref': 'x', 'xanchor': 'left',
-                'y': traces[-1]['y'][-1], 'yref': 'y', 'yanchor': 'top',
+                'y': traces[-1]['y'][-1], 'yref': 'y', 'yanchor': 'middle',
                 'showarrow': False,
                 'text': label,
                 'font': {'size': 12},
@@ -274,7 +274,7 @@ layout = html.Div([
             skip_labels=[
                 'Full-service restaurants',
                 'Engineering and drafting services',
-                'Beer, wine and liquor stores',
+                'Gasoline stations',
                 'Supermarkets and other grocery stores',
                 'Used merchandise stores'
             ]
@@ -330,8 +330,9 @@ layout = html.Div([
             [
                 'General contractors for new homes',
                 'Land subdivision',
-                'Furniture stores',
-                'Residential remodelers',
+                'For-sale home builders',
+                'Building finishing contractors (drywall, painting)',
+                'Interior design services',
                 'Architectural services',
                 'Wood product manufacturing',
                 'For'
@@ -356,8 +357,7 @@ layout = html.Div([
         figure=create_figure(
             list(df_jobs[df_jobs.alternacategory == 'oil'].cescode),
             [
-                'Oil and gas pipeline construction',
-                'Natural gas distribution'
+                'Petroleum and coal product manufacturing'
             ]
         ), id='oil',
         style={'height': '90vh'}
@@ -380,7 +380,8 @@ layout = html.Div([
             list(df_jobs[df_jobs.alternacategory == 'media'].cescode),
             [
                 'Video and photography services',
-                'Radio, television, cable and other broadcasting'
+                'Book publishers (and those that also publish e-books)',
+                'Data processing, web hosting and related services'
             ]
         ), id='media',
         style={'height': '90vh'}
@@ -399,7 +400,7 @@ layout = html.Div([
     dcc.Graph(
         figure=create_figure(
             list(df_jobs[df_jobs.alternacategory == 'booming'].cescode),
-            ['Pharmacies and drug stores']
+            ['Barber shops and beauty salons']
         ), id='booming',
         style={'height': '90vh'}
     ),
@@ -418,7 +419,7 @@ layout = html.Div([
                 {'label': c, 'value': c}
                 for c in sorted(list(df_jobs.nytlabel.unique()))
             ],
-            value=['Florists', 'Bookstores and news dealers'],
+            value=['Florists', 'Full-service restaurants'],
             multi=True,
             id='category-filter',
         ), className='container', style={'maxWidth': '650px'}),
