@@ -236,7 +236,8 @@ layout = html.Div([
 
     ***
     '''.replace('  ', ''), className='container',
-    containerProps={'style': {'maxWidth': '650px'}}),
+    ),
+    # containerProps={'style': {'maxWidth': '650px'}}),
 
     dcc.Markdown('''
     ## A Mixed Recovery
@@ -250,7 +251,8 @@ layout = html.Div([
     roughly 10 million jobs needed to keep up with growth
     in the working-age population.
     '''.replace('  ', ''), className='container',
-    containerProps={'style': {'maxWidth': '650px'}}),
+    ),
+    # containerProps={'style': {'maxWidth': '650px'}}),
 
     dcc.Graph(
         figure=create_figure(), id='overview',
@@ -266,7 +268,8 @@ layout = html.Div([
     But so are some high-paying sectors, such as **consulting**,
     **computing** and **biotech**.
     '''.replace('  ', ''), className='container',
-    containerProps={'style': {'maxWidth': '650px'}}),
+    ),
+    # containerProps={'style': {'maxWidth': '650px'}}),
 
     dcc.Graph(
         figure=create_figure(
@@ -293,7 +296,8 @@ layout = html.Div([
     But these gains have not offset losses in other middle-wage
     industries, such as airlines and construction.
     '''.replace('  ', ''), className='container',
-    containerProps={'style': {'maxWidth': '650px'}}),
+    ),
+    # containerProps={'style': {'maxWidth': '650px'}}),
 
     dcc.Graph(
         figure=create_figure(
@@ -321,7 +325,8 @@ layout = html.Div([
     the recession began — hundreds of thousands more than
     health care has added.
     '''.replace('  ', ''), className='container',
-    containerProps={'style': {'maxWidth': '650px'}}),
+    ),
+    # containerProps={'style': {'maxWidth': '650px'}}),
 
     dcc.Graph(
         figure=create_figure(
@@ -351,7 +356,8 @@ layout = html.Div([
     and North Dakota.
     Many of these industries have average salaries above $70,000.
     '''.replace('  ', ''), className='container',
-    containerProps={'style': {'maxWidth': '650px'}}),
+    ),
+    # containerProps={'style': {'maxWidth': '650px'}}),
 
     dcc.Graph(
         figure=create_figure(
@@ -373,7 +379,8 @@ layout = html.Div([
     Electronic shopping and auctions made up the
      fastest-growing industry, tripling in employment in 10 years.
     '''.replace('  ', ''), className='container',
-    containerProps={'style': {'maxWidth': '650px'}}),
+    ),
+    # containerProps={'style': {'maxWidth': '650px'}}),
 
     dcc.Graph(
         figure=create_figure(
@@ -395,7 +402,8 @@ layout = html.Div([
     Nail salons, which made up one of the most resilient industries,
     were closely rivaled by pet boarding, grooming and training.
     '''.replace('  ', ''), className='container',
-    containerProps={'style': {'maxWidth': '650px'}}),
+    ),
+    # containerProps={'style': {'maxWidth': '650px'}}),
 
     dcc.Graph(
         figure=create_figure(
@@ -411,7 +419,8 @@ layout = html.Div([
     Discover patterns yourself by filtering through industries with
     the dropdown below.
     '''.replace('  ', ''), className='container',
-    containerProps={'style': {'maxWidth': '650px'}}),
+    ),
+    # containerProps={'style': {'maxWidth': '650px'}}),
 
     html.Div(
         dcc.Dropdown(
@@ -440,17 +449,17 @@ layout = html.Div([
     [Get in touch](https://plot.ly/products/consulting-and-oem/).
     '''.replace('  ', ''),
         className='container',
-        containerProps={'style': {'maxWidth': '650px'}}
+        # containerProps={'style': {'maxWidth': '650px'}}
     ),
 
-    html.Div(
-        dcc.SyntaxHighlighter(
-            open('report_nyt_255.py', 'r').read(),
-            language='python'
-        ),
-        className='container',
-        style={'maxWidth': '650px', 'borderLeft': 'thin solid lightgrey'}
-    )
+    # html.Div(
+    #     dcc.SyntaxHighlighter(
+    #         open('report_nyt_255.py', 'r').read(),
+    #         language='python'
+    #     ),
+    #     className='container',
+    #     style={'maxWidth': '650px', 'borderLeft': 'thin solid lightgrey'}
+    # )
 
 ])
 
